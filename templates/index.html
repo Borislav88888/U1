@@ -1052,17 +1052,122 @@
                 background-color: var(--primary-color) !important;
             }
 
+            /* Стили для калькулятора */
             .calculator {
-                position: absolute;
-                top: 150px;
+                position: fixed;
+                top: 80px;
                 right: 20px;
-                width: 400px; /* Увеличиваем ширину до 400px */
-                background-color: var(--container-bg);
-                border-radius: 15px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                transition: all 0.3s ease-in-out;
+                width: 200px; /* Уменьшаем общую ширину */
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                padding: 12px; /* Уменьшаем отступы */
                 z-index: 1000;
-                overflow: hidden;
+                display: none;
+            }
+
+            /* Дисплей калькулятора */
+            .calc-display {
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                padding: 8px;
+                margin-bottom: 8px;
+                display: flex;
+                justify-content: flex-end; /* Выравнивание вправо */
+                overflow: hidden; /* Предотвращаем выход за границы */
+            }
+
+            .calc-input {
+                width: 100%;
+                background: transparent;
+                border: none;
+                color: var(--text-color);
+                font-size: 16px; /* Уменьшаем размер шрифта */
+                text-align: right; /* Выравнивание текста вправо */
+                font-family: 'Montserrat', sans-serif;
+                padding: 4px 8px;
+                outline: none;
+                white-space: nowrap; /* Предотвращаем перенос строки */
+                overflow: hidden; /* Скрываем выходящий за границы текст */
+                text-overflow: ellipsis; /* Добавляем многоточие при переполнении */
+                min-height: 24px; /* Фиксированная высота */
+                max-width: 100%; /* Максимальная ширина */
+                box-sizing: border-box; /* Учитываем padding в общей ширине */
+            }
+
+            /* Сетка кнопок */
+            .calc-buttons {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 6px; /* Уменьшаем отступы между кнопками */
+            }
+
+            /* Стили кнопок */
+            .calc-button {
+                aspect-ratio: 1;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px; /* Уменьшаем размер шрифта */
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 500;
+                color: var(--text-color);
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(5px);
+                cursor: pointer;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 8px; /* Уменьшаем padding */
+                min-width: 32px; /* Минимальная ширина */
+                min-height: 32px; /* Минимальная высота */
+            }
+
+            /* Специальные кнопки */
+            .calc-button[data-action="calculate"] {
+                background: var(--primary-color);
+                color: white;
+            }
+
+            .calc-button[data-action="clear"] {
+                color: #ff6b6b;
+            }
+
+            /* Эффекты при наведении */
+            .calc-button:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+
+            .calc-button[data-action="calculate"]:hover {
+                background: var(--primary-color);
+                opacity: 0.9;
+            }
+
+            /* Кнопка закрытия */
+            .close-calc {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                width: 20px; /* Уменьшаем размер */
+                height: 20px; /* Уменьшаем размер */
+                border-radius: 50%;
+                background: rgba(255, 0, 0, 0.8);
+                color: white;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px; /* Уменьшаем размер шрифта */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .close-calc:hover {
+                background: rgba(255, 0, 0, 1);
+                transform: scale(1.1);
             }
 
             .calc-header {
@@ -1079,31 +1184,18 @@
                 color: var(--text-color);
             }
 
-            .close-calc {
-                background: none;
-                border: none;
-                font-size: 16px;
-                cursor: pointer;
-                opacity: 0.7;
-                transition: opacity 0.3s;
-            }
-
-            .close-calc:hover {
-                opacity: 1;
-            }
-
             .calc-display {
                 padding: 15px;
                 background-color: rgba(0,0,0,0.02);
             }
 
+            /* Добавляем стили для выражения */
             .calc-expression {
-                font-size: 14px;
+                font-size: 12px; /* Меньший размер шрифта для выражения */
                 color: var(--text-color);
                 opacity: 0.7;
-                min-height: 20px;
+                margin-top: 2px;
                 text-align: right;
-                margin-bottom: 5px;
             }
 
             #calcInput {
@@ -1203,7 +1295,8 @@
         }
 
         /* Стили для кнопки переключения темы */
-        .theme-button {
+        .theme-button,
+        .calculator-button {
             background: none;
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
@@ -1216,17 +1309,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease; /* Плавный переход */
             position: relative;
             overflow: hidden;
         }
 
-        .theme-button:hover {
-            transform: scale(1.1);
-            box-shadow: var(--glow-effect);
+        .theme-button:hover,
+        .calculator-button:hover {
+            transform: scale(1.1) rotate(2deg); /* Увеличение и легкий поворот */
+            animation: shake 0.3s ease; /* Анимация подергивания */
         }
 
-        .theme-button::before {
+        /* Анимация подергивания */
+        @keyframes shake {
+            0% { transform: scale(1.1) rotate(2deg); }
+            25% { transform: scale(1.1) rotate(-2deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+            75% { transform: scale(1.1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        .theme-button::before,
+        .calculator-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -1239,7 +1343,8 @@
             z-index: -1;
         }
 
-        .theme-button:hover::before {
+        .theme-button:hover::before,
+        .calculator-button:hover::before {
             opacity: 0.1;
         }
 
@@ -1277,6 +1382,11 @@
             --container-bg: rgba(255, 255, 255, 0.1);
             --primary-color: #4FC3F7; /* Морская волна */
             --glow-effect: 0 0 15px rgba(79, 195, 247, 0.3);
+        }
+
+        .calculator {
+            display: none; /* Скрыт по умолчанию */
+            /* Остальные стили */
         }
 
     </style>
@@ -1409,43 +1519,32 @@
             <button id="toggleCalculator" title="Калькулятор">🧮</button>
             </div>
 
-        <div id="calculator" class="calculator" style="display: none;">
-            <div class="calc-header">
-                <h2>Калькулятор</h2>
-                <button class="close-calc">❌</button>
-        </div>
+        <div id="calculator" class="calculator">
             <div class="calc-display">
+                <input type="text" id="calcInput" class="calc-input" readonly />
                 <div class="calc-expression"></div>
-                <input type="text" id="calcInput" readonly placeholder="0" />
-    </div>
+            </div>
             <div class="calc-buttons">
-                <button class="calc-button clear" data-action="clear">C</button>
-                <button class="calc-button" data-action="backspace">⌫</button>
-                <button class="calc-button operator" data-value="(">(</button>
-                <button class="calc-button operator" data-value=")">)</button>
-                
                 <button class="calc-button" data-value="7">7</button>
                 <button class="calc-button" data-value="8">8</button>
                 <button class="calc-button" data-value="9">9</button>
-                <button class="calc-button operator" data-value="/">÷</button>
-                
+                <button class="calc-button" data-action="backspace">←</button>
                 <button class="calc-button" data-value="4">4</button>
                 <button class="calc-button" data-value="5">5</button>
                 <button class="calc-button" data-value="6">6</button>
-                <button class="calc-button operator" data-value="*">×</button>
-                
+                <button class="calc-button" data-value="/">÷</button>
                 <button class="calc-button" data-value="1">1</button>
                 <button class="calc-button" data-value="2">2</button>
                 <button class="calc-button" data-value="3">3</button>
-                <button class="calc-button operator" data-value="-">-</button>
-                
+                <button class="calc-button" data-value="*">×</button>
                 <button class="calc-button" data-value="0">0</button>
-                <button class="calc-button" data-value=".">.</button>
-                <button class="calc-button equals" data-action="calculate">=</button>
-                <button class="calc-button operator" data-value="+">+</button>
+                <button class="calc-button" data-action="calculate">=</button>
+                <button class="calc-button" data-action="clear">C</button>
+                <button class="calc-button" data-value="-">-</button>
+                <button class="close-calc">✖</button>
             </div>
         </div>
-      
+
         </div>
 
     <script>
@@ -2127,6 +2226,7 @@
             wakeWord = display.textContent.trim().toLowerCase();
             updateStatus(`Ожидаю команду: ${wakeWord}`);
             startWakeWordRecognition();
+            toggleCalculator(false); // Убедитесь, что калькулятор скрыт при загрузке
         });
 
                 document.getElementById('mainButton').addEventListener('click', () => {
@@ -2311,26 +2411,6 @@
             }
         }
 
-        function fetchSiteLink(siteName) {
-            fetch('/api/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: `Открой ${siteName}` }) // Отправляем запрос
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.link) {
-                    window.open(data.link, '_blank'); // Открываем ссылку в новой вкладке
-                } else {
-                    console.error('Ссылка не найдена:', data);
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка при получении ссылки:', error);
-            });
-        }
 
         function stopRecognition() {
             if (recognition) {
