@@ -767,7 +767,7 @@
                 transform: translate(-50%, -50%) scale(1);
         }
 
-        .giga-chat-container:hover {
+            .giga-chat-container:hover {
                 animation: waveEffect 1s linear infinite;
                 box-shadow: 
                     0 15px 40px rgba(0, 114, 255, 0.6),
@@ -1008,48 +1008,48 @@
 
             /* Стили для разных тем */
             body.light-theme {
-                --bg-color: #f5f7fa;
+                --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
                 --text-color: #2c3e50;
-                --container-bg: #ffffff;
-                --border-color: #e0e0e0;
-                --hover-color: #f8f9fa;
+                --container-bg: rgba(255, 255, 255, 0.9);
+                --primary-color: #3498db;
+                --glow-effect: 0 0 15px rgba(52, 152, 219, 0.3);
             }
 
             body.dark-theme {
-                --bg-color: #2c3e50;
-                --text-color: #ecf0f1;
-                --container-bg: #34495e;
-                --border-color: #4a6278;
-                --hover-color: #2c3e50;
+                --background-gradient: linear-gradient(135deg, #0f1419 0%, #1a1f25 100%);
+                --text-color: #00f7ff;
+                --container-bg: rgba(255, 255, 255, 0.05);
+                --primary-color: #00f7ff;
+                --glow-effect: 0 0 15px rgba(0, 247, 255, 0.3);
             }
 
-            body.color-theme {
-                --bg-color: #ffeaa7;
-                --text-color: #2d3436;
-                --container-bg: #fff6dd;
-                --border-color: #fdcb6e;
-                --hover-color: #ffeaa7;
+            body.neon-theme {
+                --background-gradient: linear-gradient(135deg, #000000 0%, #1a0f25 100%);
+                --text-color: #ff00ff;
+                --container-bg: rgba(255, 0, 255, 0.05);
+                --primary-color: #ff00ff;
+                --glow-effect: 0 0 15px rgba(255, 0, 255, 0.3);
             }
 
             /* Применение переменных темы */
             body {
-                background: var(--bg-color);
+                background: var(--background-gradient);
                 color: var(--text-color);
                 transition: all 0.3s ease;
             }
 
             .speech-container {
                 background-color: var(--container-bg) !important;
-                border-color: var(--border-color) !important;
+                border-color: var(--primary-color) !important;
             }
 
             .chat-entry {
                 background-color: var(--container-bg) !important;
-                border: 1px solid var(--border-color) !important;
+                border: 1px solid var(--primary-color) !important;
             }
 
             .chat-entry:hover {
-                background-color: var(--hover-color) !important;
+                background-color: var(--primary-color) !important;
             }
 
             .calculator {
@@ -1180,10 +1180,10 @@
             }
 
             /* Стили для цветной темы */
-            body.color-theme .chat-output,
-            body.color-theme .calculator {
-                background-color: #fff6dd; /* Светло-желтый фон */
-                color: #2d3436; /* Темный текст */
+            body.neon-theme .chat-output,
+            body.neon-theme .calculator {
+                background-color: #000000; /* Черный фон */
+                color: #ff00ff; /* Неоновый текст */
             }
 
             /* Стили для полей с текстом */
@@ -1202,10 +1202,83 @@
             align-items: flex-start; /* Выравнивание по левому краю */
         }
 
+        /* Стили для кнопки переключения темы */
+        .theme-button {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 24px;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
+        .theme-button:hover {
+            transform: scale(1.1);
+            box-shadow: var(--glow-effect);
+        }
 
+        .theme-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
 
-       
+        .theme-button:hover::before {
+            opacity: 0.1;
+        }
+
+        /* Пастельная тема */
+        body.pastel-theme {
+            --background-gradient: linear-gradient(135deg, #E6E6FA 0%, #FFF0F5 100%); /* Лавандовый градиент */
+            --text-color: #9370DB; /* Средний пурпурный */
+            --container-bg: rgba(255, 255, 255, 0.8);
+            --primary-color: #DDA0DD; /* Сливовый */
+            --glow-effect: 0 0 15px rgba(221, 160, 221, 0.3);
+        }
+
+        /* Тема "Космос" */
+        body.space-theme {
+            --background-gradient: linear-gradient(135deg, #000428 0%, #004e92 100%);
+            --text-color: #ffffff;
+            --container-bg: rgba(255, 255, 255, 0.1);
+            --primary-color: #00f7ff;
+            --glow-effect: 0 0 15px rgba(0, 247, 255, 0.3);
+        }
+
+        /* Тема "Лес" */
+        body.forest-theme {
+            --background-gradient: linear-gradient(135deg, #134E5E 0%, #71B280 100%); /* Лесной градиент */
+            --text-color: #E8F5E9; /* Светло-зеленый */
+            --container-bg: rgba(255, 255, 255, 0.1);
+            --primary-color: #81C784; /* Мятно-зеленый */
+            --glow-effect: 0 0 15px rgba(129, 199, 132, 0.3);
+        }
+
+        /* Тема "Океан" */
+        body.ocean-theme {
+            --background-gradient: linear-gradient(135deg, #1A2980 0%, #26D0CE 100%); /* Океанический градиент */
+            --text-color: #E3F2FD; /* Светло-голубой */
+            --container-bg: rgba(255, 255, 255, 0.1);
+            --primary-color: #4FC3F7; /* Морская волна */
+            --glow-effect: 0 0 15px rgba(79, 195, 247, 0.3);
+        }
+
     </style>
 </head>
     <body class="light-theme">
@@ -2073,33 +2146,63 @@
             function updateThemeIcon() {
                 switch(currentTheme) {
                     case 'light':
-                        themeButton.textContent = '🌓';
+                        themeButton.textContent = '🌞'; // Солнце для светлой темы
                         break;
                     case 'dark':
-                        themeButton.textContent = '🌞';
+                        themeButton.textContent = '🌒'; // Луна для темной темы
                         break;
-                    case 'color':
-                        themeButton.textContent = '🌙';
+                    case 'neon':
+                        themeButton.textContent = '💫'; // Звезда для неоновой темы
+                        break;
+                    case 'pastel':
+                        themeButton.textContent = '🌸'; // Цветок для пастельной темы
+                        break;
+                    case 'space':
+                        themeButton.textContent = '🌌'; // Космос для темы космоса
+                        break;
+                    case 'forest':
+                        themeButton.textContent = '🌲'; // Дерево для лесной темы
+                        break;
+                    case 'ocean':
+                        themeButton.textContent = '🌊'; // Вода для океанической темы
+                        break;
+                    case 'sunset':
+                        themeButton.textContent = '🌅'; // Закат для темы заката
                         break;
                 }
             }
 
             themeButton.onclick = function() {
-                document.body.classList.remove('light-theme', 'dark-theme', 'color-theme');
+                document.body.classList.remove('light-theme', 'dark-theme', 'neon-theme', 'pastel-theme', 'space-theme', 'forest-theme', 'ocean-theme', 'sunset-theme');
                 
                 if (currentTheme === 'light') {
                     currentTheme = 'dark';
                     document.body.classList.add('dark-theme');
                 } else if (currentTheme === 'dark') {
-                    currentTheme = 'color';
-                    document.body.classList.add('color-theme');
+                    currentTheme = 'neon';
+                    document.body.classList.add('neon-theme');
+                } else if (currentTheme === 'neon') {
+                    currentTheme = 'pastel';
+                    document.body.classList.add('pastel-theme');
+                } else if (currentTheme === 'pastel') {
+                    currentTheme = 'space';
+                    document.body.classList.add('space-theme');
+                } else if (currentTheme === 'space') {
+                    currentTheme = 'forest';
+                    document.body.classList.add('forest-theme');
+                } else if (currentTheme === 'forest') {
+                    currentTheme = 'ocean';
+                    document.body.classList.add('ocean-theme');
+                } else if (currentTheme === 'ocean') {
+                    currentTheme = 'sunset';
+                    document.body.classList.add('sunset-theme');
                 } else {
                     currentTheme = 'light';
                     document.body.classList.add('light-theme');
                 }
                 
                 updateThemeIcon();
-                localStorage.setItem('theme', currentTheme); // Сохраняем выбранную тему
+                localStorage.setItem('theme', currentTheme);
             };
 
             // Загружаем сохраненную тему при запуске
