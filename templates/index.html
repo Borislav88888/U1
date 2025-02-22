@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Иерархический распознаватель команд</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="path/to/your/styles.css">
     <style>
+        /* Обновленные базовые стили */
+        :root {
+            --primary-color: #00f7ff;
+            --secondary-color: #2c3e50;
+            --background-gradient: linear-gradient(135deg, #1a1f25 0%, #31363c 100%);
+            --container-bg: rgba(255, 255, 255, 0.05);
+            --text-color: #ffffff;
+            --border-radius: 15px;
+            --glow-effect: 0 0 15px rgba(0, 247, 255, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,11 +27,12 @@
             html, body {
                 height: 100%;
                 margin: 0;
-            }
+        }
 
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: var(--background-gradient);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
             min-height: 100vh;
             padding: 10px;
             display: flex;
@@ -41,11 +53,14 @@
         }
 
         .speech-container {
+            background: var(--container-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--glow-effect);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
             flex: 1;
-            background-color: white;
-                padding: 10px;
-                border-radius: 10px;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
             display: flex;
             flex-direction: column;
                 min-width: 200px;
@@ -104,11 +119,13 @@
         }
 
         h1 {
-            color: #2c3e50;
+            color: var(--primary-color);
             text-align: center;
             font-size: 1.5em;
             margin-bottom: 20px;
             font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+            letter-spacing: 1px;
         }
 
         textarea {
@@ -124,6 +141,10 @@
             line-height: 1.5;
             flex-grow: 1;
             min-height: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            backdrop-filter: blur(5px);
         }
 
         input[type="text"] {
@@ -133,6 +154,10 @@
             font-size: 14px;
             flex: 1;
             min-width: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            backdrop-filter: blur(5px);
         }
 
         button {
@@ -141,13 +166,16 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            background-color: #3498db;
-            color: white;
+            background: rgba(0, 247, 255, 0.1);
+            color: var(--primary-color);
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
             min-width: 80px;
         }
 
         button:hover {
-            background-color: #2980b9;
+            background: rgba(0, 247, 255, 0.2);
+            box-shadow: var(--glow-effect);
         }
 
         .toggle.active {
@@ -168,7 +196,8 @@
         .status {
             text-align: center;
             margin-top: 10px;
-            color: #7f8c8d;
+            color: var(--primary-color);
+            text-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
             min-height: 20px;
             display: flex;
             align-items: center;
@@ -212,11 +241,12 @@
             bottom: 0;
             left: 0;
             height: 2px;
-            background: #2ecc71;
+            background: var(--primary-color);
             width: 0;
             transition: width 0.1s linear;
             border-radius: 0 0 8px 8px;
             cursor: pointer;
+            box-shadow: 0 0 10px var(--primary-color);
         }
 
         .progress-container {
@@ -280,11 +310,11 @@
             -webkit-appearance: none;
             width: 12px;
             height: 12px;
-            background: #2c3e50;
+            background: var(--primary-color);
             border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 0 10px var(--primary-color);
         }
 
         .rate-slider::-webkit-slider-thumb:hover {
@@ -415,10 +445,12 @@
             border-radius: 50%;
             background-color: #e74c3c;
             transition: background-color 0.3s;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
         }
 
         .mic-indicator.active {
-            background-color: #2ecc71;
+            background-color: var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
         }
 
         .speech-toggle.loading {
@@ -431,28 +463,7 @@
             100% { opacity: 1; }
         }
 
-        .history-button {
-            background: none;
-            border: none;
-            font-size: 20px;
-            padding: 4px;
-            cursor: pointer;
-            color: #2c3e50;
-            min-width: auto;
-            transition: transform 0.2s;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.05);
-        }
-
-        .history-button:hover {
-            transform: scale(1.1);
-            background: rgba(0,0,0,0.1);
-        }
+       
 
         .modal {
             display: none;
@@ -467,11 +478,13 @@
         }
 
         .modal-content {
-                background-color: #fff;
+                background: var(--background-gradient);
             margin: 10% auto;
             padding: 20px;
-                border-radius: 10px;
+                border-radius: var(--border-radius);
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(0, 247, 255, 0.2);
+                backdrop-filter: blur(15px);
             width: 80%;
                 max-width: 800px;
                 display: flex;
@@ -578,10 +591,12 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--glow-effect);
+            border-radius: var(--border-radius);
             padding: 10px 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .control-button {
@@ -752,7 +767,7 @@
                 transform: translate(-50%, -50%) scale(1);
         }
 
-            .giga-chat-container:hover {
+        .giga-chat-container:hover {
                 animation: waveEffect 1s linear infinite;
                 box-shadow: 
                     0 15px 40px rgba(0, 114, 255, 0.6),
@@ -880,19 +895,7 @@
                 color: #666;
             }
 
-            .chat-history {
-                position: absolute;
-                top: 150px;
-                right: 20px;
-                width: 400px;
-                background-color: var(--container-bg);
-                border-radius: 15px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-                transition: opacity 0.3s ease-in-out;
-                z-index: 1000;
-                overflow: hidden;
-            }
-
+          
             .chat-header {
                 display: flex;
                 justify-content: space-between;
@@ -907,19 +910,9 @@
                 color: var(--text-color);
             }
 
-            .close-history {
-                background: none;
-                border: none;
-                font-size: 16px;
-                cursor: pointer;
-                opacity: 0.7;
-                transition: opacity 0.3s;
-            }
+          
 
-            .close-history:hover {
-                opacity: 1;
-            }
-
+          
             .chat-list {
                 padding: 15px;
                 max-height: 400px;
@@ -1123,23 +1116,6 @@
                 color: var(--text-color);
             }
 
-            .calc-buttons {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 8px;
-                padding: 15px;
-            }
-
-            .calc-button {
-                padding: 15px;
-                border: none;
-                border-radius: 10px;
-                font-size: 18px;
-                cursor: pointer;
-                background-color: rgba(0,0,0,0.05);
-                color: var(--text-color);
-                transition: all 0.2s;
-            }
 
             .calc-button:hover {
                 background-color: rgba(0,0,0,0.1);
@@ -1174,31 +1150,21 @@
             }
 
             .calculator-toggle button {
-                background: none;
+               
+            background: none;
                 border: none;
                 font-size: 24px;
-                padding: 0; /* Убираем отступы */
+                padding: 8px;
                 cursor: pointer;
-                border-radius: 50%; /* Делаем кнопку круглой */
-                width: 40px; /* Ширина */
-                height: 40px; /* Высота */
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: rgba(0,0,0,0.05);
                 transition: all 0.3s ease;
+        
             }
-
-            .calculator-toggle button:hover {
-                transform: scale(1.1);
-                background-color: rgba(0,0,0,0.1);
-            }
-
-            .calculator-toggle button.active {
-                background-color: rgba(52, 152, 219, 0.2);
-                color: #3498db;
-            }
-
             /* Стили для светлой темы */
             body.light-theme .chat-output,
             body.light-theme .calculator {
@@ -1228,46 +1194,6 @@
                 min-height: 100px; /* Минимальная высота */
             }
 
-            /* Стили для калькулятора */
-            .calculator {
-                border: 1px solid #ccc; /* Добавьте границу, если нужно */
-                border-radius: 10px; /* Закругленные углы */
-                padding: 10px; /* Отступы внутри поля */
-            }
-
-            /* Добавим стили для плавного появления/исчезновения */
-            .calculator {
-                transition: opacity 0.3s ease-in-out;
-        }
-
-        /* Стили для кнопок нового чата и истории */
-        .new-chat-button,
-        .history-button {
-            display: block; /* Измените на блочный элемент */
-            width: 100%; /* Задайте ширину, если нужно */
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #3498db; /* Цвет кнопки */
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .new-chat-button:hover,
-        .history-button:hover {
-            background-color: #2980b9; /* Темный цвет при наведении */
-        }
-
-        /* Удалите или измените стили для элемента */
-        .sidebar {
-            display: none; /* Удалите этот блок */
-        }
-
-        .calculator {
-            transition: opacity 0.3s ease-in-out;
-            display: none; /* Скрыто по умолчанию */
-        }
 
         .button-container {
             display: flex;
@@ -1276,27 +1202,10 @@
             align-items: flex-start; /* Выравнивание по левому краю */
         }
 
-        .calculator-button,
-        .history-button {
-            display: block; /* Измените на блочный элемент */
-            width: 100%; /* Задайте ширину, если нужно */
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #3498db; /* Цвет кнопки */
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
 
-        .calculator-button:hover,
-        .history-button:hover {
-            background-color: #2980b9; /* Темный цвет при наведении */
-        }
 
-        #chatWindow {
-            transition: opacity 0.3s ease-in-out;
-        }
+
+       
     </style>
 </head>
     <body class="light-theme">
@@ -1322,8 +1231,8 @@
                         <button onclick="toggleSpeechEnabled()" id="speechToggle" class="speech-toggle">
                             🔈
                         </button>
-                                <button onclick="openNewChat()" class="new-chat-button" title="Новый чат"></button>
-                                <button onclick="toggleChatHistory()">История чатов</button>
+                        
+                                
                     </div>
                     <div class="mic-indicator" id="micIndicator"></div>
                     <div class="speech-controls" id="speechControls" style="display: none;">
@@ -1372,13 +1281,7 @@
                                     </div>
                                 </div>
 
-                                <button onclick="showResponseHistory()" class="control-button history" title="История ответов">
-                                    <span class="icon">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
-                                        </svg>
-                                    </span>
-                                </button>
+                                
                             </div>
                         </div>
                     </div>
@@ -1402,24 +1305,12 @@
                     <input type="text" id="newCommand" placeholder="Введите новую команду..."
                            onkeypress="if(event.key === 'Enter') addCommand()">
                     <div class="commands-actions">
-                        <button onclick="addCommand()">➕ Добавить команду</button>
+                        <button onclick="addCommand()">➕ </button>
                     </div>
                 </div>
                 <div class="commands-list" id="commandsList"></div>
                 <textarea id="output1" placeholder="Здесь появятся распознанные команды..." readonly></textarea>
                 <div class="status" id="status1"></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="responseHistoryModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>История ответов</h2>
-                <button onclick="closeResponseHistory()" class="close-button">×</button>
-            </div>
-            <div class="modal-body">
-                <div id="responseHistoryList"></div>
             </div>
         </div>
     </div>
@@ -1431,50 +1322,29 @@
 
             <div id="extraButtonsContainer" class="extra-buttons-container"></div>
 
-            <div id="mediaPanel" class="media-panel" style="display: none;">
-                <div class="media-panel-header">
-                    <h2 style="font-size: 16px; margin: 0;">Чат</h2>
-                    <button class="close-media-button" onclick="closeMediaPanel()">✖</button>
-                </div>
-                <div id="mediaResponse" class="media-panel-content">
-                    <p>Здесь будет ваша информация о чате.</p>
-                </div>
-            </div>
+            
 
-            <!-- Обновим HTML для истории чата -->
-            <div id="chatHistory" class="chat-history" style="display: none;">
-                <div class="chat-header">
-                    <h2>История чатов</h2>
-                    <button class="close-history">❌</button>
-                </div>
-                <div class="chat-list"></div>
-            </div>
 
-            <div id="chatModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <h2>Содержимое чата</h2>
-                    <div id="modalChatContent"></div>
-                </div>
-            </div>
 
+
+           
         <div class="theme-toggle">
             <button id="toggleTheme" title="Сменить тему">🌓</button>
-        </div>
+            </div>
 
         <div class="calculator-toggle">
             <button id="toggleCalculator" title="Калькулятор">🧮</button>
-        </div>
+            </div>
 
         <div id="calculator" class="calculator" style="display: none;">
             <div class="calc-header">
                 <h2>Калькулятор</h2>
                 <button class="close-calc">❌</button>
-            </div>
+        </div>
             <div class="calc-display">
                 <div class="calc-expression"></div>
                 <input type="text" id="calcInput" readonly placeholder="0" />
-            </div>
+    </div>
             <div class="calc-buttons">
                 <button class="calc-button clear" data-action="clear">C</button>
                 <button class="calc-button" data-action="backspace">⌫</button>
@@ -1502,7 +1372,6 @@
                 <button class="calc-button operator" data-value="+">+</button>
             </div>
         </div>
-
       
         </div>
 
@@ -1704,14 +1573,9 @@
 
             const chatOutput = document.getElementById('chatOutput');
             const timestamp = new Date().toLocaleTimeString();
-            const sendButton = document.querySelector('button[onclick="sendMessage()"]');
+            chatOutput.value += `[${timestamp}] Вы: ${message}\n`;
             
             try {
-                sendButton.disabled = true;
-                updateStatus('Отправка сообщения...');
-                    
-                    chatOutput.value += `[${timestamp}] Вы: ${message}\n`;
-                    
                 const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: {
@@ -1720,66 +1584,20 @@
                     body: JSON.stringify({ message })
                 });
 
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
                 const data = await response.json();
                 
                 if (data.error) {
                     chatOutput.value += `[${timestamp}] Ошибка: ${data.error}\n`;
-                    updateStatus('Ошибка: ' + data.error);
                 } else {
                     const botResponse = data.response;
                     chatOutput.value += `[${timestamp}] GigaChat: ${botResponse}\n`;
-                        
-                    if (speechEnabled) {
-                        try {
-                                const speechToggle = document.getElementById('speechToggle');
-                            speechToggle.classList.add('loading');
-                            updateStatus('Генерация речи...');
-                                
-                            const audioResponse = await fetch('/api/tts', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ text: botResponse })
-                            });
-                            
-                            if (!audioResponse.ok) {
-                                    throw new Error('Ошибка синтеза речи');
-                            }
-                            
-                            const audioBlob = await audioResponse.blob();
-                            const audioUrl = URL.createObjectURL(audioBlob);
-                            
-                            if (audioPlayer) {
-                                audioPlayer.pause();
-                                audioPlayer = null;
-                            }
-                            
-                            audioPlayer = setupAudioPlayer(audioUrl);
-                            audioPlayer.play();
-                            document.getElementById('speechControls').style.display = 'flex';
-                            updateStatus('Воспроизведение...');
-                        } catch (error) {
-                            console.error('TTS error:', error);
-                            updateStatus('Ошибка синтеза речи: ' + error.message);
-                        } finally {
-                            speechToggle.classList.remove('loading');
-                        }
-                    }
                 }
             } catch (error) {
-                    console.error('Error:', error);
                 chatOutput.value += `[${timestamp}] Ошибка: ${error.message}\n`;
-                updateStatus('Ошибка отправки сообщения: ' + error.message);
-            } finally {
-                sendButton.disabled = false;
+            }
+
+            chatOutput.scrollTop = chatOutput.scrollHeight;
             input.value = '';
-                    chatOutput.scrollTop = chatOutput.scrollHeight;
-                }
         }
 
         async function sendVoiceMessage(message) {
@@ -1807,7 +1625,6 @@
                 } else {
                     const botResponse = data.response;
                     chatOutput.value += `[${timestamp}] GigaChat: ${botResponse}\n`;
-                            showMediaResponse(botResponse);
                     if (speechEnabled) {
                         try {
                             speechToggle.classList.add('loading');
@@ -1953,7 +1770,7 @@
 
         function checkCommands(transcript) {
             if (!transcript) return;
-
+            
             const output1 = document.getElementById('output1');
             const timestamp = new Date().toLocaleTimeString();
             const text = transcript.toLowerCase();
@@ -2053,25 +1870,7 @@
             }
         }
 
-        function toggleHistory(isOpen) {
-            const history = document.getElementById('chatHistory');
-            if (history) {
-                if (isOpen) {
-                    history.style.display = 'block';
-                    history.style.opacity = '0';
-                    setTimeout(() => {
-                        history.style.opacity = '1';
-                        fetchChatHistory();
-                    }, 10);
-                } else {
-                    history.style.opacity = '0';
-                    setTimeout(() => {
-                        history.style.display = 'none';
-                    }, 300);
-                }
-            }
-        }
-
+      
         function editAssistantName() {
             const display = document.getElementById('assistantNameDisplay');
             const currentName = display.textContent.trim();
@@ -2195,22 +1994,21 @@
         function toggleSpeechEnabled() {
             const button = document.getElementById('speechToggle');
             speechEnabled = !speechEnabled;
+            
             if (speechEnabled) {
                 button.textContent = '🔊';
                 button.classList.add('active');
                 button.title = 'Озвучка включена';
-                if (lastResponse && lastResponse.audioUrl) {
-                    const speechControls = document.getElementById('speechControls');
-                    speechControls.style.display = 'flex';
-                    if (!audioPlayer) {
-                        audioPlayer = setupAudioPlayer(lastResponse.audioUrl);
-                    }
-                }
+                
+                // Открываем мультимедийную панель
+                const mediaPanel = document.getElementById('mediaPanel');
+                mediaPanel.style.display = 'block'; // Показываем панель
             } else {
                 button.textContent = '🔈';
                 button.classList.remove('active');
                 button.title = 'Озвучка выключена';
                 button.classList.remove('playing', 'paused');
+                
                 if (audioPlayer) {
                     audioPlayer.pause();
                     audioPlayer = null;
@@ -2220,21 +2018,11 @@
         }
 
         function showResponseHistory() {
-            const modal = document.getElementById('responseHistoryModal');
-            const historyList = document.getElementById('responseHistoryList');
-            
-            historyList.innerHTML = responseHistory.map((response, index) => `
-                <div class="response-item" onclick="playHistoryResponse(${index})">
-                    <div class="response-time">${response.timestamp}</div>
-                    <div>${response.text.substring(0, 100)}${response.text.length > 100 ? '...' : ''}</div>
-                </div>
-            `).join('');
-            
-            modal.style.display = 'block';
+            // Удалите или закомментируйте этот код
         }
 
         function closeResponseHistory() {
-            document.getElementById('responseHistoryModal').style.display = 'none';
+            // Удалите или закомментируйте этот код
         }
 
         function playHistoryResponse(index) {
@@ -2277,152 +2065,10 @@
                     createExtraButtons();
                 });
 
-                function createExtraButtons() {
-                    const container = document.getElementById('extraButtonsContainer');
-                    container.innerHTML = '';
+              
 
-                    const numberOfButtons = 6;
-                    const radius = 150;
+            
 
-                    for (let i = 0; i < numberOfButtons; i++) {
-                        const angle = (i / numberOfButtons) * (2 * Math.PI);
-                        const x = radius * Math.cos(angle);
-                        const y = radius * Math.sin(angle);
-
-                        const button = document.createElement('button');
-                        button.className = 'extra-button';
-                        button.style.position = 'absolute';
-                        button.style.transform = `translate(${x}px, ${y}px)`;
-                        button.innerHTML = `<span>🔘</span>`;
-                        button.onclick = () => alert('Дополнительная кнопка нажата!');
-
-                        button.style.opacity = 0;
-                        button.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                        setTimeout(() => {
-                            button.style.opacity = 1;
-                            button.style.transform += ' scale(1.1)';
-                        }, 100 * i);
-
-                        container.appendChild(button);
-                    }
-                }
-
-                function showMediaResponse(response) {
-                    const mediaResponse = document.getElementById('mediaResponse');
-                    mediaResponse.innerHTML = `<p>${response}</p>`;
-                    const mediaPanel = document.getElementById('mediaPanel');
-                    mediaPanel.style.display = 'block';
-                }
-
-                function closeMediaPanel() {
-                    const mediaPanel = document.getElementById('mediaPanel');
-                    mediaPanel.style.display = 'none';
-                }
-
-                function openNewChat() {
-                    fetch('/api/new-chat', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status) {
-                            console.log(data.status);
-                            document.getElementById('chatMessage').value = '';  
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Ошибка при открытии нового чата:', error);
-                    });
-                }
-
-                function fetchChatHistory() {
-                    fetch('/api/get-chat-history')
-                        .then(response => response.json())
-                        .then(data => {
-                            const chatList = document.querySelector('.chat-list');
-                            chatList.innerHTML = ''; // Очищаем предыдущую историю
-
-                            data.history.forEach((chat, index) => {
-                                const chatEntry = document.createElement('div');
-                                chatEntry.className = 'chat-entry';
-                                chatEntry.innerHTML = `Чат ${index + 1}`;
-                                chatEntry.onclick = () => showChatContent(chat);
-                                chatList.appendChild(chatEntry);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Ошибка при получении истории чатов:', error);
-                        });
-                }
-
-                function getChatSummary(chat) {
-                    // Собираем весь текст чата
-                    const chatContent = chat.map(msg => msg.content).join('\n');
-                    
-                    return fetch('/api/get-chat-summary', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ chat_content: chatContent })
-                    })
-                    .then(response => response.json())
-                    .then(data => data.summary)
-                    .catch(error => {
-                        console.error('Ошибка при получении описания чата:', error);
-                        return null;
-                    });
-                }
-
-                function getLastMessage(chat) {
-                    if (chat && chat.length > 0) {
-                        const lastMsg = chat[chat.length - 1].content;
-                        return lastMsg.length > 50 ? lastMsg.substring(0, 50) + '...' : lastMsg;
-                    }
-                    return '';
-                }
-
-                function updateChatHistory() {
-                    const chatHistoryContainer = document.getElementById('chatHistory');
-                    const chatEntries = chatHistoryContainer.getElementsByClassName('chat-entry');
-                    const totalHeight = Array.from(chatEntries).reduce((acc, entry) => acc + entry.offsetHeight, 0);
-                    chatHistoryContainer.style.height = totalHeight + 'px';
-                }
-
-                function showChatContent(chat) {
-                    const modalChatContent = document.getElementById('modalChatContent');
-                    modalChatContent.innerHTML = chat.map(msg => `<p>${msg.content}</p>`).join('');
-                    document.getElementById('chatModal').style.display = 'block';
-                }
-
-                function closeModal() {
-                    document.getElementById('chatModal').style.display = 'none';
-                }
-
-            function toggleChatHistory() {
-                const chatHistory = document.getElementById('chatHistory');
-                const button = document.querySelector('.history-button');
-                const isVisible = chatHistory.style.display !== 'none';
-                
-                if (!isVisible) {
-                    chatHistory.style.display = 'block';
-                    chatHistory.style.opacity = '0';
-                    setTimeout(() => {
-                        chatHistory.style.opacity = '1';
-                        fetchChatHistory();
-                    }, 10);
-                    button.classList.add('active');
-                } else {
-                    chatHistory.style.opacity = '0';
-                    setTimeout(() => {
-                        chatHistory.style.display = 'none';
-                    }, 300);
-                    button.classList.remove('active');
-                }
-            }
 
             function updateThemeIcon() {
                 switch(currentTheme) {
@@ -2552,45 +2198,8 @@
                 }
             });
 
-            // Добавим обработчик для кнопки закрытия
-            document.querySelector('.close-history').onclick = function() {
-                const chatHistory = document.getElementById('chatHistory');
-                const button = document.querySelector('.history-button');
-                chatHistory.style.opacity = '0';
-                setTimeout(() => {
-                    chatHistory.style.display = 'none';
-                }, 300);
-                button.classList.remove('active');
-            };
-
-            // Функция для сохранения чата в историю
-            function saveChatToHistory(chat) {
-                // Отправка на сервер для сохранения
-                fetch('/api/save-chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ chat })
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Ошибка сети: ' + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Чат сохранен:', data);
-                })
-                .catch(error => {
-                    console.error('Ошибка при сохранении чата:', error);
-                });
-            }
-
-            // Обработчик для кнопки истории чатов
-            document.querySelector('.history-button').onclick = function() {
-                loadChatHistory(); // Убедитесь, что эта функция все еще нужна
-            };
+           
+          
 
         function toggleCalculator(isOpen) {
             const calculator = document.getElementById('calculator');
